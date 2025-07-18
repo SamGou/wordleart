@@ -23,7 +23,7 @@ def main(problem_str:str):
         OVERALL_WORD_SET = set([line.strip().upper() for line in f if len(line.strip()) == 5])
             
     # Get todays solution
-    todays_word,letter_pos,counter = get_today_solution()
+    todays_word,letter_pos,counter_const = get_today_solution()
     print("TODAYS ANSWER", todays_word)
     
     # Modify response string to match grid
@@ -36,12 +36,17 @@ def main(problem_str:str):
     
     solved = False
     unsolvable = False
+    prev_sols = {i:"" for i in problem_grid}
     for n,line in enumerate(problem_grid):
         print(f"SOLUTION: {solution}")
         # if already solved, exit loop
         if solved or unsolvable:
             break
         
+        if line != "#"*5 and prev_sols[line] != '':
+            solution[n] = prev_sols[line]
+            continue
+            
         # if line is a full green line, just return todays answer
         if line == 'G'*5:
             solution[n] = todays_word
@@ -69,11 +74,12 @@ def main(problem_str:str):
                 
                 # Rebuild the Trie per iteration to reduce search space
                 if pos == 0:
+                    counter = copy.copy(counter_const)
                     root_reduced = copy.deepcopy(root) # just copy existing root with all words present for first iteration
-                    # inverted_index_reduced = copy.deepcopy(inverted_index)
+                    inverted_index_reduced = copy.deepcopy(inverted_index)
                 else: 
                     root_reduced = buildTrie(current_word_set) # rebuild it based on previous constraints
-                    # inverted_index_reduced = build_inverted_index_with_counts(current_word_set)
+                    inverted_index_reduced = build_inverted_index_with_counts(current_word_set)
                     
                 # If its green we know the exact letter and position
                 if block == "G":
@@ -103,15 +109,22 @@ def main(problem_str:str):
                     constraint_in_pos = [(i,pos) for i in todays_letters]
                     set_list = []
                     for constraint in constraint_in_pos:
-                        set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
+                        letters_at_pos = findMatchingWords(trieRoot=root_reduced,constraints=[constraint])
+                        all_doubles = words_with_letter_mincount(inverted_index_reduced,
+                                                                 constraint[0],
+                                                                 counter[constraint[0]]+1)
+                        # Find the difference 
+                        doubles_removed = letters_at_pos.difference(all_doubles) 
+                        set_list.append(doubles_removed)
+                        
                     ignore_word_set = combine_sets_union(set_list)
                     current_word_set.difference_update(ignore_word_set)
             
             # Get all with matching counts if its final
-            if line == 'O'*5:
+            if "O" in line:
                 inverted_index_count_match = build_inverted_index_with_counts(current_word_set)
                 set_list = []
-                for letter,i in counter.items():
+                for letter,i in counter_const.items():
                     set_list.append(words_with_letter_maxcount(inverted_index_count_match,letter=letter,max_count=i))
                 available_word_set = combine_sets_intersect(set_list)
                 current_word_set.intersection_update(available_word_set) 
@@ -120,7 +133,10 @@ def main(problem_str:str):
             if not current_word_set:
                 unsolvable = True
                 break
+            
             solution[n] = random.sample(list(current_word_set),1)[0]
+            if prev_sols[line] == '':
+                prev_sols[line] = solution[n]
 
     # TODO think about implementing logic which handles cases where if say answer is NOVEL and the input is NEVER the code will be G#GG# because the E is in the correct position to begin with.
     # If the answer was NEEDO put NEVER would be GG#O#
@@ -129,3 +145,8 @@ def main(problem_str:str):
         return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":[]})
 
     return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
+if __name__ == "__main__":
+    string = "".join(["GGGGG",'O####', 'OO###', 'OOO##', 'OOOO#', 'OOOOO'])
+    print(main(string))
+    
+    # GNOME - ENEMY #G#G#
