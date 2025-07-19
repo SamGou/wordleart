@@ -32,6 +32,12 @@ def update_curr_struct_intersect(current_word_set:set,available_word_set:set):
     reduced_inv_index = build_inverted_index_with_counts(new_word_set)
     return new_word_set,reduced_trie_root,reduced_inv_index
 
+def update_curr_struct_difference(current_word_set:set,available_word_set:set):
+    new_word_set = current_word_set.difference(available_word_set)
+    reduced_trie_root = buildTrie(new_word_set)
+    reduced_inv_index = build_inverted_index_with_counts(new_word_set)
+    return new_word_set,reduced_trie_root,reduced_inv_index
+
 if __name__ == '__main__':
     set_list = [words_with_letter_mincount(inv_idx,"A",3),words_with_letter_mincount(inv_idx,"T",1)]
     print(combine_sets_intersect(set_list))

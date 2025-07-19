@@ -6,10 +6,11 @@ from helpers.InvertedIndexCounts import load_inverted_index_with_counts, words_w
 from helpers.SerialiseRoot import loadRoot
 from helpers.Trie import buildTrie
 from helpers.GetCurrentDaySolution import get_today_solution
-from helpers.SetOperations import combine_sets_intersect, combine_sets_union,update_curr_struct_intersect
+from helpers.SetOperations import combine_sets_intersect, combine_sets_union,update_curr_struct_intersect,update_curr_struct_difference
 from helpers.DeconstructLine import deconstruct_line
 from helpers.WordSearch import letter_pos_combinations_orange
 from collections import Counter
+import itertools
 import json
 
 def main(problem_str:str):
@@ -86,48 +87,46 @@ def main(problem_str:str):
             
             # Orange
             # Generate orange potential combinations
-            orange_pos = block_map["O"]
-            combinations = letter_pos_combinations_orange(orange_pos=orange_pos,
-                                                          letter_pos=letter_pos,
-                                                          counter=temp_counter)
-            orange_set_list = []
-            for combo in combinations:
-                constraint_list = [(letter,position) for letter,position in zip(combo,orange_pos)]
-                combination_set_list = []
-                for constraint in constraint_list:
-                    combination_set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
-                # Intersect these sets of potential words with letters in exact positions
-                orange_set_list.append(combine_sets_intersect(combination_set_list))
-            # Union all potential words
-            all_possible_orange_words = combine_sets_union(orange_set_list)
-            # Intersect with current_word_set
-            current_word_set,root_reduced,inverted_index_reduced = update_curr_struct_intersect(current_word_set,all_possible_orange_words)
-            # End the search if unsolvable
-            if not current_word_set:
-                unsolvable = True
-                break
+            if block_map["O"]:
+                orange_pos = block_map["O"]
+                combinations = letter_pos_combinations_orange(orange_pos=orange_pos,
+                                                            letter_pos=letter_pos,
+                                                            counter=temp_counter)
+                orange_set_list = []
+                for combo in combinations:
+                    constraint_list = [(letter,position) for letter,position in zip(combo,orange_pos)]
+                    combination_set_list = []
+                    for constraint in constraint_list:
+                        combination_set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
+                    # Intersect these sets of potential words with letters in exact positions
+                    orange_set_list.append(combine_sets_intersect(combination_set_list))
+                # Union all potential words
+                all_possible_orange_words = combine_sets_union(orange_set_list)
+                # Intersect with current_word_set
+                current_word_set,root_reduced,inverted_index_reduced = update_curr_struct_intersect(current_word_set,all_possible_orange_words)
+                # End the search if unsolvable
+                if not current_word_set:
+                    unsolvable = True
+                    break
                 
             # Gray
-            gray_pos = block_map["#"]
-            # First ignore all words with green letters in gray positions
-            green_blacklist = []
-            constraint_list = [(letter_pos[pos][0],pos) for pos in gray_pos]
-            for constraint in constraint_list:
-                green_blacklist.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
-            green_blacklist = combine_sets_union(green_blacklist)
-            current_word_set.difference_update(green_blacklist)
-            
-            set_list = []
-            for potential_word in current_word_set:
-                potential_word_counter = Counter(potential_word)
-                remaining_letters = temp_counter-potential_word_counter
-                remaining_letters = set(remaining_letters.keys())
-                
-                letters_at_gray_pos = set([potential_word[i] for i in gray_pos])
-                set_list.append(remaining_letters.intersection(letters_at_gray_pos))
-            blacklist = combine_sets_union(set_list)
-            current_word_set.difference_update(blacklist)
+            if block_map["#"]:
+                gray_pos = block_map["#"]
 
+                blacklist = set()
+                for potential_word in current_word_set:
+                    potential_word_counter = Counter("".join([potential_word[i] for i in block_map["G"] + block_map["O"]]))
+                    remaining_letters = temp_counter-potential_word_counter
+                    remaining_letters = set(remaining_letters.keys())
+                    # Build constraint list
+                    constraint_combinations = list(itertools.product(remaining_letters, gray_pos))
+                    for letter,pos in constraint_combinations:
+                        if letter == potential_word[pos]:
+                            blacklist.add(potential_word)
+                            break
+                    
+                current_word_set.difference_update(blacklist)
+ 
             # Draw a word from the remaining available word list and append to solution
             if not current_word_set:
                 unsolvable = True
@@ -142,7 +141,7 @@ def main(problem_str:str):
 
     return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
 if __name__ == "__main__":
-    string = "".join(["GOO##",'O####', 'OO###', 'OOO##', 'OOOO#', 'OOOOO'])
+    string = "".join(['G#O#O', '#G###', '##G##', '###G#', '####G', '#####'])
     print(main(string))
     
     # GNOME - ENEMY #G#G#
