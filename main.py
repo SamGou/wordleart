@@ -109,32 +109,25 @@ def main(problem_str:str):
                 
             # Gray
             gray_pos = block_map["#"]
-            green_blacklist = []
             # First ignore all words with green letters in gray positions
+            green_blacklist = []
             constraint_list = [(letter_pos[pos][0],pos) for pos in gray_pos]
             for constraint in constraint_list:
                 green_blacklist.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
-            green_blacklist = combine
+            green_blacklist = combine_sets_union(green_blacklist)
+            current_word_set.difference_update(green_blacklist)
+            
             set_list = []
             for potential_word in current_word_set:
-                current_word_counter = Counter(potential_word)
-                #any remain letters in any of the gray pos
-                res = temp_counter-current_word_counter
-                for constraint in constraint_list:
-                    combination_set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
-                # for correct_letter in set_of_letters:
-                #     if 
+                potential_word_counter = Counter(potential_word)
+                remaining_letters = temp_counter-potential_word_counter
+                remaining_letters = set(remaining_letters.keys())
                 
-            
-            # # Get all with matching counts if its final
-            # if "O" in line:
-            #     inverted_index_count_match = build_inverted_index_with_counts(current_word_set)
-            #     set_list = []
-            #     for letter,i in counter_const.items():
-            #         set_list.append(words_with_letter_maxcount(inverted_index_count_match,letter=letter,max_count=i))
-            #     available_word_set = combine_sets_intersect(set_list)
-            #     current_word_set.intersection_update(available_word_set) 
-            
+                letters_at_gray_pos = set([potential_word[i] for i in gray_pos])
+                set_list.append(remaining_letters.intersection(letters_at_gray_pos))
+            blacklist = combine_sets_union(set_list)
+            current_word_set.difference_update(blacklist)
+
             # Draw a word from the remaining available word list and append to solution
             if not current_word_set:
                 unsolvable = True
@@ -144,9 +137,6 @@ def main(problem_str:str):
             if prev_sols[line] == '':
                 prev_sols[line] = solution[n]
 
-    # TODO think about implementing logic which handles cases where if say answer is NOVEL and the input is NEVER the code will be G#GG# because the E is in the correct position to begin with.
-    # If the answer was NEEDO put NEVER would be GG#O#
-    # This will expand the list of available words and make solutions more likely
     if unsolvable:
         return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":[]})
 
