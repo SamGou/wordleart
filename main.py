@@ -6,7 +6,10 @@ from helpers.InvertedIndexCounts import load_inverted_index_with_counts, words_w
 from helpers.SerialiseRoot import loadRoot
 from helpers.Trie import buildTrie
 from helpers.GetCurrentDaySolution import get_today_solution
-from helpers.SetOperations import combine_sets_intersect, combine_sets_union
+from helpers.SetOperations import combine_sets_intersect, combine_sets_union,update_curr_struct_intersect
+from helpers.DeconstructLine import deconstruct_line
+from helpers.WordSearch import letter_pos_combinations_orange
+from collections import Counter
 import json
 
 def main(problem_str:str):
@@ -23,6 +26,9 @@ def main(problem_str:str):
         OVERALL_WORD_SET = set([line.strip().upper() for line in f if len(line.strip()) == 5])
             
     # Get todays solution
+    # todays_word -> "NEVER"
+    # letter_pos -> [("N",0),("E",1),("V",2),("E",3),("R",4)]
+    # Counter_const -> {"N":1,"E":2,"V":1,"R":1}
     todays_word,letter_pos,counter_const = get_today_solution()
     print("TODAYS ANSWER", todays_word)
     
@@ -43,15 +49,15 @@ def main(problem_str:str):
         if solved or unsolvable:
             break
         
-        if line != "#"*5 and prev_sols[line] != '':
+        elif line != "#"*5 and prev_sols[line] != '':
             solution[n] = prev_sols[line]
-            continue
             
+                  
         # if line is a full green line, just return todays answer
-        if line == 'G'*5:
+        elif line == 'G'*5:
             solution[n] = todays_word
             solved = True
-            continue
+            
         
         elif line == '#'*5:
             # NOTE: for fully #####, find all words that include at least 1 count of the letters in todays words and .difference iteratively from the total set
@@ -62,72 +68,72 @@ def main(problem_str:str):
             ignore_word_list = combine_sets_union(set_list)
             available_word_list = OVERALL_WORD_SET - ignore_word_list # Remove the list of words which contain at least on letter from todays answer in any position  
             solution[n] = random.sample(list(available_word_list),1)[0]
-            continue
-        
-        else:
-            current_word_set = copy.copy(OVERALL_WORD_SET)
-            for pos,block in enumerate(line):
-                # If current wordset is empty then it is unsolvable
-                if not current_word_set:
-                    unsolvable = True
-                    break
-                
-                # Rebuild the Trie per iteration to reduce search space
-                if pos == 0:
-                    counter = copy.copy(counter_const)
-                    root_reduced = copy.deepcopy(root) # just copy existing root with all words present for first iteration
-                    inverted_index_reduced = copy.deepcopy(inverted_index)
-                else: 
-                    root_reduced = buildTrie(current_word_set) # rebuild it based on previous constraints
-                    inverted_index_reduced = build_inverted_index_with_counts(current_word_set)
-                    
-                # If its green we know the exact letter and position
-                if block == "G":
-                    constraint = letter_pos[pos]
-                    available_word_set = findMatchingWords(trieRoot=root_reduced,constraints=[constraint])
-                    current_word_set.intersection_update(available_word_set)
-                    # Take away number of remaining counts
-                    counter[constraint[0]] -= 1
-                
-                # If orange we know it can be only a select few letters
-                elif block == "O":
-                    correct_letter = letter_pos[pos][0] # correct letter at current position
-                    letters_in_todays_word = set({letter:i for letter,i in counter.items() if i > 0}.keys()) # set of all remaining letters in todays answer
-                    available_letters = letters_in_todays_word.difference(correct_letter) # Get available letters 
-                    
-                    constraint_in_pos = [(i,pos) for i in available_letters]
-                    set_list = []
-                    for constraint in constraint_in_pos:
-                        set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
-                    available_word_set = combine_sets_union(set_list)
-                    
-                    current_word_set.intersection_update(available_word_set)
-                
-                # If gray it can be anything but what is in today's answer
-                elif block == "#":
-                    todays_letters = set(todays_word)
-                    constraint_in_pos = [(i,pos) for i in todays_letters]
-                    set_list = []
-                    for constraint in constraint_in_pos:
-                        letters_at_pos = findMatchingWords(trieRoot=root_reduced,constraints=[constraint])
-                        all_doubles = words_with_letter_mincount(inverted_index_reduced,
-                                                                 constraint[0],
-                                                                 counter[constraint[0]]+1)
-                        # Find the difference 
-                        doubles_removed = letters_at_pos.difference(all_doubles) 
-                        set_list.append(doubles_removed)
-                        
-                    ignore_word_set = combine_sets_union(set_list)
-                    current_word_set.difference_update(ignore_word_set)
             
-            # Get all with matching counts if its final
-            if "O" in line:
-                inverted_index_count_match = build_inverted_index_with_counts(current_word_set)
-                set_list = []
-                for letter,i in counter_const.items():
-                    set_list.append(words_with_letter_maxcount(inverted_index_count_match,letter=letter,max_count=i))
-                available_word_set = combine_sets_intersect(set_list)
-                current_word_set.intersection_update(available_word_set) 
+        else:
+            # Init
+            root_reduced = copy.deepcopy(root) # Structure to help find words with letters in exact positions
+            inverted_index_reduced = copy.deepcopy(inverted_index) # Structure to help with finding min/max number of letters in a word or a word with any amount of said letter
+            current_word_set = copy.copy(OVERALL_WORD_SET) # {"WORDS","WORDS"}
+            temp_counter = copy.copy(counter_const) # {"N":1,"E":2,"V":1,"R":1}
+            block_map = deconstruct_line(line) # {"G":[],"O":[],"#":[]}
+
+            # Iterate through G's first
+            for pos in block_map["G"]:
+                constraint = letter_pos[pos]
+                available_word_set = findMatchingWords(trieRoot=root_reduced,constraints=[constraint])
+                current_word_set,root_reduced,inverted_index_reduced = update_curr_struct_intersect(current_word_set,available_word_set)
+                temp_counter[constraint[0]] -= 1
+            
+            # Orange
+            # Generate orange potential combinations
+            orange_pos = block_map["O"]
+            combinations = letter_pos_combinations_orange(orange_pos=orange_pos,
+                                                          letter_pos=letter_pos,
+                                                          counter=temp_counter)
+            orange_set_list = []
+            for combo in combinations:
+                constraint_list = [(letter,position) for letter,position in zip(combo,orange_pos)]
+                combination_set_list = []
+                for constraint in constraint_list:
+                    combination_set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
+                # Intersect these sets of potential words with letters in exact positions
+                orange_set_list.append(combine_sets_intersect(combination_set_list))
+            # Union all potential words
+            all_possible_orange_words = combine_sets_union(orange_set_list)
+            # Intersect with current_word_set
+            current_word_set,root_reduced,inverted_index_reduced = update_curr_struct_intersect(current_word_set,all_possible_orange_words)
+            # End the search if unsolvable
+            if not current_word_set:
+                unsolvable = True
+                break
+                
+            # Gray
+            gray_pos = block_map["#"]
+            green_blacklist = []
+            # First ignore all words with green letters in gray positions
+            constraint_list = [(letter_pos[pos][0],pos) for pos in gray_pos]
+            for constraint in constraint_list:
+                green_blacklist.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
+            green_blacklist = combine
+            set_list = []
+            for potential_word in current_word_set:
+                current_word_counter = Counter(potential_word)
+                #any remain letters in any of the gray pos
+                res = temp_counter-current_word_counter
+                for constraint in constraint_list:
+                    combination_set_list.append(findMatchingWords(trieRoot=root_reduced,constraints=[constraint]))
+                # for correct_letter in set_of_letters:
+                #     if 
+                
+            
+            # # Get all with matching counts if its final
+            # if "O" in line:
+            #     inverted_index_count_match = build_inverted_index_with_counts(current_word_set)
+            #     set_list = []
+            #     for letter,i in counter_const.items():
+            #         set_list.append(words_with_letter_maxcount(inverted_index_count_match,letter=letter,max_count=i))
+            #     available_word_set = combine_sets_intersect(set_list)
+            #     current_word_set.intersection_update(available_word_set) 
             
             # Draw a word from the remaining available word list and append to solution
             if not current_word_set:
@@ -146,7 +152,7 @@ def main(problem_str:str):
 
     return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
 if __name__ == "__main__":
-    string = "".join(["GGGGG",'O####', 'OO###', 'OOO##', 'OOOO#', 'OOOOO'])
+    string = "".join(["GOO##",'O####', 'OO###', 'OOO##', 'OOOO#', 'OOOOO'])
     print(main(string))
     
     # GNOME - ENEMY #G#G#
