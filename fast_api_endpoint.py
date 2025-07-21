@@ -6,7 +6,6 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from index_solutions import generate_all_solutions
 from main import main

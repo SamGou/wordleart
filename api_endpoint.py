@@ -1,9 +1,5 @@
 from flask import Flask, request, jsonify,render_template
 from flask_cors import CORS
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from main import main
 
 app = Flask(__name__)
