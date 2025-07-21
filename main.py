@@ -12,6 +12,8 @@ from helpers.WordSearch import letter_pos_combinations_orange
 from collections import Counter
 import itertools
 import json
+from fastapi.responses import JSONResponse
+
 
 def main(problem_str:str):
     # Load the word data structures
@@ -114,12 +116,13 @@ def main(problem_str:str):
 
                 blacklist = set()
                 for potential_word in current_word_set:
-                    G_O_letters = Counter("".join([potential_word[i] for i in block_map["G"]+block_map["O"]]))
-                    remaining_letters = temp_counter - G_O_letters
+                    O_letters = Counter("".join([potential_word[i] for i in block_map["O"]]))
+                    remaining_letters = temp_counter - O_letters
                     remaining_letters = set(remaining_letters.keys())
                     
                     # Build constraint list
                     constraint_combinations = list(itertools.product(remaining_letters, gray_pos))
+                    
                     # Add additional constraints to not override Orange letters that come earlier
                     for O_pos in block_map["O"]:
                         if O_pos > 0: # Ignore if its the first letter
@@ -144,12 +147,12 @@ def main(problem_str:str):
 
     if unsolvable:
         print(solution)
-        return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":solution})
+        return JSONResponse({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":solution})
     print(solution)
-    return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
+    return JSONResponse({"Response":200, "Message":"Solution Found!", "Solution":solution})
 
 if __name__ == "__main__":
-    string = "".join(['G#O#O', '#G###', '##G##', '###G#', '####G', '#####'])
+    string = "".join(['GG#GG', '#####', '#####', '#####', '#####', '#####'])
     print(main(string))
     
     # GNOME - ENEMY #G#G#
