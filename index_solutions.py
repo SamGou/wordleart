@@ -129,8 +129,21 @@ def line_solver(line:str):
             "Solutions":len(current_word_set), 
             "Solvable":solvable
             }
-    
 
+def generate_all_solutions():
+    print("Indexing new solutions...")
+    SOLUTIONS_PATH = './DB/all_solutions.json'
+    all_combos = generate_all_combinations_line()
+    solutions = {}
+    for pattern in all_combos:
+        solutions[pattern] = line_solver(pattern)
+    
+    #Sort the solutions
+    sorted_dict = dict(sorted(solutions.items(), key=lambda item: item[1]["Solutions"], reverse=True))
+    with open(f"{SOLUTIONS_PATH}","w") as f:
+        json.dump(sorted_dict,f)
+    return sorted_dict
+    
 if __name__ == "__main__":
     string = "".join(['GG#GG', '#####', '#####', '#####', '#####', '#####'])
     all_combos = generate_all_combinations_line()

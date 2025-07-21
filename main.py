@@ -53,7 +53,6 @@ def main(problem_str:str):
         elif line != "#"*5 and prev_sols[line] != '':
             solution[n] = prev_sols[line]
             
-                  
         # if line is a full green line, just return todays answer
         elif line == 'G'*5:
             solution[n] = todays_word
@@ -61,7 +60,6 @@ def main(problem_str:str):
             
         
         elif line == '#'*5:
-            # NOTE: for fully #####, find all words that include at least 1 count of the letters in todays words and .difference iteratively from the total set
             todays_letters = set(todays_word)
             set_list = []
             for letter in todays_letters:
