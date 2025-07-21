@@ -1,2 +1,2 @@
 # wordleart
-Make art with Wordle!
+Make art with Wordle!!
