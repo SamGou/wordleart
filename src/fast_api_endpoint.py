@@ -1,12 +1,15 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
-from main import main  # Your search/solution logic
-from index_solutions import generate_all_solutions
 import os
 import json
 import uvicorn
+import sys
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from index_solutions import generate_all_solutions
+from main import main
 
 app = FastAPI()
 
@@ -21,9 +24,9 @@ app.add_middleware(
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# @app.get("/", response_class=HTMLResponse)
+# async def index(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/get_words")
 async def get_words(req: Request):
