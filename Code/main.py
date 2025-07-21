@@ -145,6 +145,7 @@ def main(problem_str:str):
     if unsolvable:
         print(solution)
         return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":solution})
+    
     print(solution)
     return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
 
