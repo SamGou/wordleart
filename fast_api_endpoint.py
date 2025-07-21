@@ -3,6 +3,9 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from main import main  # Your search/solution logic
+from index_solutions import generate_all_solutions
+import os
+import json
 import uvicorn
 
 app = FastAPI()
@@ -31,6 +34,18 @@ async def get_words(req: Request):
     words = main(color_string)
     return words
 
+@app.get('/get_all_solutions')
+async def get_all_solutions():
+    SOLUTIONS_PATH = "./DB/all_solutions.json"
+    if os.path.exists(f"{SOLUTIONS_PATH}"):
+        with open(f"{SOLUTIONS_PATH}","r") as f:
+            return JSONResponse(json.load(f))
+    else:
+        res = generate_all_solutions()
+        print("New solutions generated")
+        return JSONResponse(res)
+    
 if __name__ == "__main__":
     # For debugging: hot reload, port 8080
     uvicorn.run("fast_api_endpoint:app", host="0.0.0.0", port=8080, reload=True)
+    # os.system("gunicorn fast_api_endpoint:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8080 --workers 4")
