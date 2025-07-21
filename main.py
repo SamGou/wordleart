@@ -45,7 +45,6 @@ def main(problem_str:str):
     unsolvable = False
     prev_sols = {i:"" for i in problem_grid}
     for n,line in enumerate(problem_grid):
-        print(f"SOLUTION: {solution}")
         # if already solved, exit loop
         if solved or unsolvable:
             break
@@ -115,19 +114,26 @@ def main(problem_str:str):
 
                 blacklist = set()
                 for potential_word in current_word_set:
-                    potential_word_counter = Counter("".join([potential_word[i] for i in block_map["G"] + block_map["O"]]))
-                    remaining_letters = temp_counter-potential_word_counter
+                    G_O_letters = Counter("".join([potential_word[i] for i in block_map["G"]+block_map["O"]]))
+                    remaining_letters = temp_counter - G_O_letters
                     remaining_letters = set(remaining_letters.keys())
+                    
                     # Build constraint list
                     constraint_combinations = list(itertools.product(remaining_letters, gray_pos))
+                    # Add additional constraints to not override Orange letters that come earlier
+                    for O_pos in block_map["O"]:
+                        if O_pos > 0: # Ignore if its the first letter
+                            constraint_combinations += itertools.product(potential_word[O_pos],range(O_pos))
+                        else:
+                            continue
+                        
                     for letter,pos in constraint_combinations:
                         if letter == potential_word[pos]:
                             blacklist.add(potential_word)
                             break
                     
                 current_word_set.difference_update(blacklist)
- 
-            # Draw a word from the remaining available word list and append to solution
+                
             if not current_word_set:
                 unsolvable = True
                 break
@@ -137,9 +143,11 @@ def main(problem_str:str):
                 prev_sols[line] = solution[n]
 
     if unsolvable:
-        return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":[]})
-
+        print(solution)
+        return json.dumps({"Response":500,"Message":"Unsolvable with current word and grid colours", "Solution":solution})
+    print(solution)
     return json.dumps({"Response":200, "Message":"Solution Found!", "Solution":solution})
+
 if __name__ == "__main__":
     string = "".join(['G#O#O', '#G###', '##G##', '###G#', '####G', '#####'])
     print(main(string))
