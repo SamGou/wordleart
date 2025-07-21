@@ -1,0 +1,974 @@
+{
+    "#####": {
+        "Solutions": 5623,
+        "Solvable": true
+    },
+    "##O##": {
+        "Solutions": 1158,
+        "Solvable": true
+    },
+    "###O#": {
+        "Solutions": 1075,
+        "Solvable": true
+    },
+    "#G###": {
+        "Solutions": 874,
+        "Solvable": true
+    },
+    "####G": {
+        "Solutions": 839,
+        "Solvable": true
+    },
+    "####O": {
+        "Solutions": 585,
+        "Solvable": true
+    },
+    "G####": {
+        "Solutions": 481,
+        "Solvable": true
+    },
+    "#O###": {
+        "Solutions": 348,
+        "Solvable": true
+    },
+    "O####": {
+        "Solutions": 296,
+        "Solvable": true
+    },
+    "##OO#": {
+        "Solutions": 137,
+        "Solvable": true
+    },
+    "#G##G": {
+        "Solutions": 123,
+        "Solvable": true
+    },
+    "##O#O": {
+        "Solutions": 96,
+        "Solvable": true
+    },
+    "##O#G": {
+        "Solutions": 95,
+        "Solvable": true
+    },
+    "G#O##": {
+        "Solutions": 89,
+        "Solvable": true
+    },
+    "###OO": {
+        "Solutions": 88,
+        "Solvable": true
+    },
+    "#GO##": {
+        "Solutions": 85,
+        "Solvable": true
+    },
+    "###OG": {
+        "Solutions": 75,
+        "Solvable": true
+    },
+    "##G##": {
+        "Solutions": 70,
+        "Solvable": true
+    },
+    "#G#O#": {
+        "Solutions": 67,
+        "Solvable": true
+    },
+    "#OO##": {
+        "Solutions": 66,
+        "Solvable": true
+    },
+    "GG###": {
+        "Solutions": 63,
+        "Solvable": true
+    },
+    "#G##O": {
+        "Solutions": 62,
+        "Solvable": true
+    },
+    "G###G": {
+        "Solutions": 59,
+        "Solvable": true
+    },
+    "#O#O#": {
+        "Solutions": 57,
+        "Solvable": true
+    },
+    "G##O#": {
+        "Solutions": 52,
+        "Solvable": true
+    },
+    "###G#": {
+        "Solutions": 46,
+        "Solvable": true
+    },
+    "O##O#": {
+        "Solutions": 32,
+        "Solvable": true
+    },
+    "OG###": {
+        "Solutions": 26,
+        "Solvable": true
+    },
+    "O#O##": {
+        "Solutions": 26,
+        "Solvable": true
+    },
+    "O###O": {
+        "Solutions": 25,
+        "Solvable": true
+    },
+    "G###O": {
+        "Solutions": 22,
+        "Solvable": true
+    },
+    "GO###": {
+        "Solutions": 21,
+        "Solvable": true
+    },
+    "#GG##": {
+        "Solutions": 19,
+        "Solvable": true
+    },
+    "#G#OG": {
+        "Solutions": 16,
+        "Solvable": true
+    },
+    "#O##G": {
+        "Solutions": 16,
+        "Solvable": true
+    },
+    "##OG#": {
+        "Solutions": 16,
+        "Solvable": true
+    },
+    "##GO#": {
+        "Solutions": 12,
+        "Solvable": true
+    },
+    "#GO#G": {
+        "Solutions": 11,
+        "Solvable": true
+    },
+    "GG##G": {
+        "Solutions": 9,
+        "Solvable": true
+    },
+    "O###G": {
+        "Solutions": 9,
+        "Solvable": true
+    },
+    "#O##O": {
+        "Solutions": 9,
+        "Solvable": true
+    },
+    "##GGG": {
+        "Solutions": 9,
+        "Solvable": true
+    },
+    "###GG": {
+        "Solutions": 9,
+        "Solvable": true
+    },
+    "OO###": {
+        "Solutions": 8,
+        "Solvable": true
+    },
+    "##OOG": {
+        "Solutions": 6,
+        "Solvable": true
+    },
+    "#G#G#": {
+        "Solutions": 5,
+        "Solvable": true
+    },
+    "##GG#": {
+        "Solutions": 5,
+        "Solvable": true
+    },
+    "###GO": {
+        "Solutions": 5,
+        "Solvable": true
+    },
+    "G##G#": {
+        "Solutions": 4,
+        "Solvable": true
+    },
+    "OG##G": {
+        "Solutions": 4,
+        "Solvable": true
+    },
+    "#GGGG": {
+        "Solutions": 4,
+        "Solvable": true
+    },
+    "##OOO": {
+        "Solutions": 4,
+        "Solvable": true
+    },
+    "OGO##": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "O#G##": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "O#OO#": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "O##G#": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "O##OG": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "#OO#G": {
+        "Solutions": 3,
+        "Solvable": true
+    },
+    "GGO##": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "GOO##": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "G#GG#": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "G#G##": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "G#O#G": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "G##GG": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "#GGG#": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "#GOGG": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "#OO#O": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "#O#G#": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "##G#G": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "##G#O": {
+        "Solutions": 2,
+        "Solvable": true
+    },
+    "GGGGG": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "GGG##": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "GO#O#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "G#GO#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "G#O#O": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OGG#O": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OGG##": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OG#O#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OG##O": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OOG#O": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OO#O#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "OO##G": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "O#GO#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "O#O#G": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "O#O#O": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "#G#OO": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "#OGO#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "#OOO#": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "#O#OO": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "##GGO": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "##GOO": {
+        "Solutions": 1,
+        "Solvable": true
+    },
+    "GGGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGGG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGGO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGG#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGOO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGO#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GGO#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#G#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG#O#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GG##O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOGO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOG#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOG##": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOOO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOO#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GOO#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO#G#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO#OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO#OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO##G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "GO##O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#GGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#GGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#GOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#GOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#G#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#G#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G#OO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G##GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G##OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "G##OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGGO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGOO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGO#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OGO#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OG#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OG#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OG#G#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OG#OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OG#OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOGO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOG##": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOOO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOO#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOO#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OOO##": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO#G#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO#OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO#OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "OO##O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#GGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#GGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#GG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#GOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#GOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#G#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#G#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#OGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#OGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#OG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#OOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O#OOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O##GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O##GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "O##OO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GGO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GG#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GOO#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#GO#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#G#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#G#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OGGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OGGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OGG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OGOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OGOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OG#G": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OG#O": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OG##": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OOGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OOGO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OOG#": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OOOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#OOOO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#O#GG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#O#GO": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "#O#OG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "##GOG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "##OGG": {
+        "Solutions": 0,
+        "Solvable": false
+    },
+    "##OGO": {
+        "Solutions": 0,
+        "Solvable": false
+    }
+}
